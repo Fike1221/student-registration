@@ -1,0 +1,93 @@
+{% extends 'instructor_profile.html' %}
+
+
+{% block title %}
+<li><a href="{{ url_for('instructor') }}" class="course-audit">My Profile</a></li>
+{% endblock %}
+
+
+{% block content %}
+    <li><a href="{{ url_for('courses') }}" class="course-audit">Courses</a></li>
+{% endblock %}
+
+{% block main %}
+<main>
+    {% if course1 %}
+        <div class="course1">
+            <h1>Course Name: {{ course1[1] }}</h1>
+            <h1>Course Id: {{ course1[0] }}</h1>
+        </div>
+        {% if students1 %}
+            <form action="#" method="POST">
+                <input type="hidden" name="form_type" value="course1" />
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Id Number</th>
+                            <th>Deprtment</th>
+                            <th>Assign Marks</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="body">
+                        {% for student in students1 %}
+                        <tr id="row">
+                            <td>{{ student[1] }}</td>  <!-- First name -->
+                            <td>{{ student[2] }}</td>  <!-- Last Name -->
+                            <td>{{ student[0] }}</td>  <!-- Student Id -->
+                            <td>{{ student[3] }}</td>  <!-- Department -->
+                            <td><input type="number" name="{{ student[0] }}" step="any" min="0" max="100" required ></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit">Submit</button>
+            </form>
+        {% else %}
+            <h1 class="not-enrolled">There are no enrolled students for this course!</h1>
+
+        {% endif %}
+    {% endif %}
+
+
+    {% if course2 %}
+        <div class="course2">
+            <h1>Course name: {{ course2[1] }}</h1>
+            <h1>Course Id: {{ course2[0] }}</h1>
+        </div>
+        {% if students2 %}
+        <form action="#" method="POST">
+            <input type="hidden" name="form_type" value="course2" />
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Id Number</th>
+                        <th>Deprtment</th> 
+                        <th>Assign Marks</th> 
+                    </tr>
+                </thead>
+                <tbody id="body">
+                    {% for student in students2 %}
+                    <tr id="row">
+                        <td>{{ student[1] }}</td>  <!-- First name -->
+                        <td>{{ student[2] }}</td>  <!-- Last Name -->
+                        <td>{{ student[0] }}</td>  <!-- Student Id -->
+                        <td>{{ student[3] }}</td>  <!-- Department -->
+                        <td><input type="number" name="{{ student[0] }}"  step="any" required min="0" max="100" ></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button type="submit">Submit</button>
+        </form>
+        {% else %}
+            <h1 class="not-enrolled">There are no enrolled students for this course!</h1>
+        {% endif %}
+    {% endif %}
+</main>
+
+
+{% endblock %}

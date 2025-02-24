@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ head }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}" />
+    <link rel="icon" type="image/x-icon" href="/static/registration.ico">
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <button class="menu-btn">☰ Menu</button>
+
+        <ul class="navigation">
+            <li><a href="{{ url_for('student_profile') }}">Student profile</a></li>
+            <li><a href="{{ url_for('assessment_result') }}">Assessment Result</a></li>
+            <li><a href="{{ url_for('student_enrollment') }}">Enrollment</a></li>
+            <li><a href="{{ url_for('support') }}">Support Center</a></li>
+
+        </ul>
+
+        <ul class="log">
+            <li>{{ session.student_name }}</li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes" id="flash">
+            {% for message in messages %}
+            <li>{{ message }} </li>
+            <h1 id="clear">X</h1>
+            {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% block main %}
+    <main>
+        <h1>You are Signedin as Student! {{ details[1] }}</h1>
+        <div>
+            
+            <ul class="lists">
+                <li>Name: {{ details[1] }} {{ details[2] }}</li>
+                <li>ID: {{ details[0] }}</li>
+                <li>Email: {{ details[3] }}</li>
+                <li>Phone Address: {{ details[4] }}</li>
+                <li>College: Mekelle Institute of Technology</li>
+                <li>Department: {{ department }}</li>
+                {% if year %}
+                    <li>Class Year: {{ year[0][0] }} year, {{ year[1][0] }} Semester</li>
+                {% else %}
+                    <li>Class Year: Not enrolled yet.</li>
+                {% endif %}
+                <li>Academic Year: {{ current_year }} G.c</li>
+            </ul>
+            
+        </div>
+    </main>
+
+    {% endblock %}
+
+
+
+
+
+    <script>
+        // Toggle menu visibility
+        document.querySelector('.menu-btn').addEventListener('click', function () {
+            if (document.querySelector('.navigation').style.display === 'none'){
+                document.querySelector('.navigation').style.display = 'block';
+            }
+            else {
+                document.querySelector('.navigation').style.display = 'none';
+            }
+        });
+        const flash = document.getElementById('flash');
+        const clear = document.getElementById('clear');
+    
+        clear.addEventListener('click', () => {
+            flash.style.display = "none";
+        });
+    </script>
+    
+
+</body>
+</html>

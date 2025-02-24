@@ -1,0 +1,13 @@
+{% extends 'student_profile.html' %}
+
+{% block main %}
+
+<main class="support">
+    <h1>Write Your Problem here and we will review it. Include You name Or ID number please.</h1>
+    <form action="{{ url_for('support') }}" method="POST">
+        <textarea name="issue" id="issue" placeholder="type here..." requered minlength="100"></textarea>
+        <button type="submit"> Submit </button>
+    </form>
+</main>
+
+{% endblock %}

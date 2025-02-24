@@ -1,0 +1,59 @@
+{% extends 'student_profile.html' %}
+
+{% block main %}
+    <main class="assessment">
+        <h1>Assessment Result</h1>
+        {% if year_and_semester %}
+            <h2>Academic Year: {{ academic_year }}  [Year {{ year_and_semester[0] }}] [Semester {{ year_and_semester[1] }}]</h2><hr />
+        {% else %}
+            <h1>Academic Year:  --------</h1>
+        {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Course Code</th>
+                    <th>Course Title</th>
+                    <th>Cr.Hrs</th>
+                    <th>Mark</th>
+                    <th>Grade</th>
+                    <th>Average GPA</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(assessments|length) %}
+                <tr>
+                    {% if assessments[i] %}
+                        <td>{{ assessments[i][0] }}</td>  <!-- course code -->
+                        <td>{{ assessments[i][1] }}</td>  <!-- course title -->
+                        <td>{{ assessments[i][2] }}</td>  <!-- credit hours -->
+                        {% if assessments[i][3] != 0 %}
+                            <td>{{ assessments[i][3] }}</td> <!-- mark  -->
+                            <td>{{ grades[i] }}</td>  
+                        {% else %}
+                            <td> --- </td>
+                        {% endif %}
+                        
+                    {% else %}
+                        <td>-----</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td>{{ total_credit }}</td>
+                    <td>{{ total_mark }}</td>
+                    <td></td>
+                    {% if GPA != 0.0 %}
+                    <td>{{ GPA }}</td>
+                    {% else %}
+                    <td>not submmited</td>
+                    {% endif %}
+                </tr>
+            </tfoot>
+        </table>
+    </main>
+
+{% endblock %}

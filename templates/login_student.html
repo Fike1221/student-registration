@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+{% block main %}
+
+<h1>Login Here as a Student!</h1>
+<form action="{{ url_for('login_student') }}" method="POST">
+    <div class="ID">
+        <label for="stuId">Student Id </label>
+        <input type="text" name="studentId" id="stuId" required>
+    </div>
+    <div class="pswd">
+        <label for="pswd">Password </label>
+        <input type="password" name="password" id="pswd" required>
+    </div>
+    <button type="submit">Login</button>
+</form>
+<p>Not Regitered yet ?  <a href="{{ url_for('register') }}" id="register-from-login"> Register </a></p>
+
+
+
+{% endblock %}

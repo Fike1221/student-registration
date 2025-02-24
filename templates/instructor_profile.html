@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ head }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='instructor.css') }}" />
+    <link rel="icon" type="image/x-icon" href="/static/registration.ico">
+</head>
+<body>
+    <nav>
+        <ul class="navigate">
+        {% block title %}
+
+            <li><a href="{{ url_for('course_audit') }}" class="course-audit">Course Audit</a></li>
+
+        {% endblock %}
+        {% block content %}
+            <li><a href="{{ url_for('courses') }}" class="course-audit">Courses</a></li>
+        {% endblock %}
+        </ul>
+        <ul class="log">
+            <li>{{ session.instructor_name }}</li>
+            <li><a href="{{ url_for('logout') }}" id="logout">Logout</a></li>
+        </ul>
+    </nav>
+
+
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes" id="flash">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                    <h1 id="clear">X</h1>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+
+
+    {% block main %}
+    <main>
+        <h1>Details.... </h1>
+        <ul>
+            <li>Name: {{ details[1].title() }} {{ details[4].title() }}</li>
+            <li>Id: {{ details[0] }}</li>
+            <li>Email: {{ details[2] }} </li>
+            <li>Phone Number: {{ details[3] }} </li>
+            <li>Salary Per Month: {{ details[7] }} Birr</li>
+            <li>Address: {{ details[5] }} </li>
+        </ul>
+        
+    </main>
+    {% endblock %}
+
+
+
+    <script>
+        const flash = document.getElementById('flash');
+        const clear = document.getElementById('clear');
+    
+        clear.addEventListener('click', () => {
+            flash.style.display = "none";
+        });
+    </script>
+</body>
+</html>

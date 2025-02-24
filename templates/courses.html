@@ -1,0 +1,33 @@
+{% extends 'instructor_profile.html' %}
+
+
+{% block title %}
+<li><a href="{{ url_for('instructor') }}" class="course-audit">My Profile</a></li>
+{% endblock %}
+
+
+{% block content %}
+    <li><a href="{{ url_for('course_audit') }}" class="course-audit">Course Audit</a></li>
+{% endblock %}
+
+{% block main %}
+<main>
+<h1>You have to register for not more than two courses.</h1>
+
+<form action="#" method="POST">
+    <div>
+        <label for="course">Select Course: </label>
+        <select id="course" name="Courses">
+            {% for course_name in course_names %}
+            <option value="{{ course_name[0] }}">{{ course_name[0] }}</option>
+            {% endfor %}
+            
+    </select>
+    </div>
+    <button type="submit">Add</button>
+
+</form>
+</main>
+
+
+{% endblock %}

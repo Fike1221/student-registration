@@ -1,0 +1,265 @@
+* {
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: rgb(69, 69, 2);
+    padding: 10px;
+    height: 40px;
+
+    
+}
+ul.log {
+    /* width: 100px; */
+    display: flex;
+    gap: 60px;
+    font-size: 30px;
+    float: right;
+    margin: 5px;
+}
+a {
+    background-color: chocolate;
+    border-radius: 10px;
+    padding: 7px;
+} 
+
+/* Navigation bar container */
+
+@media (min-width: 1400px){
+    .menu-btn{
+        display: none;
+
+    }
+    .navigation{
+        display: flex;
+        float: left;
+        gap: 40px;
+        margin:5px;
+        font-size: 30px;
+    }
+
+}
+
+@media (max-width: 1400px){   
+
+     .menu-btn {
+        background: none;
+        color:dodgerblue;
+        font-size: 25px;
+        cursor:pointer;
+        font-weight: bold;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .menu-btn:hover{
+        border: 2px solid green;
+        background-color: rgb(102, 18, 73);
+        transition-duration: 0.4s;
+    }
+    .navigation{
+        flex-direction: column;
+        position: absolute;
+        padding: 10px 20px 10px;
+        background-color:black;
+        margin-top: 5px;
+        gap: 30px;
+        border-radius: 15px;
+        left: 0px;
+        top: 50px;
+        box-shadow: 5px 5px rgb(70, 27, 27);
+    }
+
+
+    .navigation li {
+        margin: 5px 0;
+        padding: 20px;
+    }
+    .navigation a:hover{
+        background-color: black;
+    }
+
+    .navigation a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-size: 28px;
+        transition: 0.3s;
+        display: block;
+        padding: 5px;
+        background-color:slategrey;
+    }
+
+    .navigation {
+        display: none;
+    }
+
+    .nav-bar.active .navigation{
+        display: flex;
+    }
+}
+
+
+.flashes {
+    list-style: none;
+    /* padding: 10px; */
+    background-color: #a09711;
+    border: 1px solid #c3e6cb;
+    color: black;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+.flashes li{
+  font-size: 20px;
+  padding: 8px;
+}
+.flashes h1{
+  text-align: right;
+  position: absolute;
+  top: 69px;
+  right: 10px;
+  background-color: crimson;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+div {
+    display: block;
+    margin-top: 100px;
+    justify-content: center;
+    margin-left: 100px;
+    margin-right: 40px;
+    border: 1px solid black;
+    padding: 50px;
+}
+main h1{
+    color: black;
+    text-align: center;
+    margin-top: 30px;
+}
+div .lists {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    
+}
+.lists li {
+    color: black;
+    font-size: 25px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: bolder;
+    padding: 10px;
+}
+
+
+
+
+
+/* support.html */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+textarea {
+    margin: 40px auto;
+    min-width: 500px;
+    min-height: 250px;
+    font-size: 28px;
+    color: black;
+    padding: 20px;
+
+}
+textarea:hover{
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    border: 3px solid black;
+}
+button[type="submit"] {
+    background-color: mediumseagreen;
+    color: black;
+    padding: 10px 20px;
+    margin: 50px auto;
+    font-size: 26px;
+    border-radius: 5px;
+    cursor:pointer;
+}
+
+
+
+/* Enrollment.html */
+
+.enrollment {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 50px;
+}
+
+
+.enrollment div {
+    border: none;
+    margin: 20px;
+    padding: 4px;
+}
+.enrollment div label {
+    color: black;
+    font-size: 30px;
+    margin: 20px;
+}
+.enrollment div input{
+    font-size: 26px;
+    border-radius: 5px;
+    color: black;
+}
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+/* assessment_result.html */
+
+.assessment{
+    margin: 50px;
+}
+.assessment h2{
+    margin: 30px auto 10px 20px;
+    color: black;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    
+}
+th, td{
+  padding: 8px;
+  border: none;
+  color: black;
+}
+th{
+  background-color: #f4f4f4;
+  font-size: 20px;
+}
+
+tfoot{
+    background-color: goldenrod;
+    font-size: 18px;
+}

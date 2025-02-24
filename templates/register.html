@@ -1,0 +1,52 @@
+{% extends 'home.html' %}
+
+{% block main %}
+
+<h1>Register here!</h1>
+<form action="{{ url_for('register') }}" method="POST">
+    <div class="fname">
+        <label for="fname">First name </label>
+        <input type="text" name="fname" id="fname" required>
+    </div>
+    <div class="lname">
+        <label for="lname">Last name </label>
+        <input type="text" name="lname" id="lname" required>
+    </div>
+    <div class="email">
+        <label for="email">Email </label>
+        <input type="email" name="email" id="email" required>
+    </div>
+    <div class="phone">
+        <label for="phone">Phone Number </label>
+        <input type="tel" name="phone" id="phone" required minlength="10" maxlength="13">
+    </div>
+    <div class="dob">
+        <label for="dob">Date of Birth </label>
+        <input type="date" name="dob" id="dob" required>
+    </div>
+    <div>
+        <label for="dept">Choose Department</label>
+        <select id="dept" name="department">
+            <option value="Information Technology">Information Technology</option>
+            <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+            <option value="Chemical and Biological Engineering">Chemical and Biological Engineering</option>
+            <option value="Electrical and Electronics Engineering">Electrical and Electronics Engineering</option>
+            <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+            <option value="Material Science and Engineering">Material Science and Engineering</option>
+            
+    </select>
+    </div>
+
+    <div class="pwd">
+        <label for="pwd">Password </label>
+        <input type="password" name="pwd" id="pwd" required minlength="6" maxlength="14">
+    </div>
+    <div class="cpwd">
+        <label for="cpwd">Confirm Password </label>
+        <input type="password" name="cpwd" id="cpwd" required minlength="6" maxlength="14">
+    </div>
+    <button type="submit">Register</button>
+</form>
+<p>Aleardy Registered ?  <a href="{{ url_for('login_student') }}" id="login-from-register"> LogIn </a></p>
+
+{% endblock %}

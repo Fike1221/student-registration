@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ head }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="icon" type="image/x-icon" href="/static/registration.ico">
+</head>
+<body>
+    <nav class="navbar">
+        <button class="menu-btn">☰ Menu</button>
+        <ul class="navigation">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login_student') }}">Login/Student</a></li>
+            <li><a href="{{ url_for('login_instructor') }}">Login/Instructor</a></li>
+        </ul>
+    </nav>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes" id="flash">
+                {% for message in messages %}
+                <li>{{ message }} </li>
+                <h1 id="clear">X</h1>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    
+
+
+
+
+    {% block main %}
+    <main class="home">
+        <div class="campus">
+            <h1>This is your Campus!</h1>
+
+            <a href="https://www.mit.edu.et/" title="MIT" id="mit" target="_blank"><img src="./static/MIT.jpg" alt="mit" id="mit-image"></a>
+        </div>
+        <div>
+            <h1>Register here as Student! </h1>
+            <a href="{{ url_for('register') }}" class="login-register"> Register </a><br />
+            <h1>Login here as Student! </h1>
+            <a href="{{ url_for('login_student') }}" class="login-register"> Login </a><br />
+            <h1>Login here as Instructor! </h1>
+            <a href="{{ url_for('login_instructor') }}" class="login-register"> Login </a>
+        </div>
+        <footer>
+            <p>Designed By G-7 </p>
+
+        </footer>
+
+    </main>
+    {% endblock %}
+    <script>
+
+   
+
+        // Toggle menu visibility
+        // document.querySelector('.navigation').style.display = 'block';
+        document.querySelector('.menu-btn').addEventListener('click', function () {
+            if (document.querySelector('.navigation').style.display === 'none'){
+                document.querySelector('.navigation').style.display = 'block'
+            }
+            else {
+                document.querySelector('.navigation').style.display = 'none'
+            }
+        });
+        const flash = document.getElementById('flash');
+        const clear = document.getElementById('clear');
+    
+        clear.addEventListener('click', () => {
+            flash.style.display = "none";
+        });
+
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+        // onmouseup(document.querySelector('.navigation').style.display = 'none');
+    </script>
+
+</body>
+</html>
