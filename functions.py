@@ -5,7 +5,7 @@ from email.mime.multipart import MIMEMultipart
 # Define the email sender and recipient
 sender_email = "fikadumom@gmail.com"
 # receiver_email = 'mulugetateamrat9@gmail.com'
-password = "crgr rfak kkbc xyvb"  # App password if using Gmail
+password = "use your google generated password here"  # App password if using Gmail
 
 
 
@@ -56,6 +56,7 @@ def generate_salary():
     return random.randint(10000, 20000)
 
 def generate_grade(mark):
+    """Assigns grades and points"""
     grade = ""
     point = None
     if mark >= 90:
