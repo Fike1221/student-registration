@@ -11,14 +11,14 @@ now = datetime.now()
 app = Flask(__name__)
 
 # configure the mysql server env't
-app.config["SECRET_KEY"] = "hey47fewod3i4rcmi3rurmxkp23od94jvxz../"
+app.config["SECRET_KEY"] = "" # Here use a strong key
 app.config["MYSQL_HOST"] = "localhost"
 app.config["MYSQL_USER"] = "root"
 app.config["MYSQL_PASSWORD"] = ''
-app.config["MYSQL_DB"] = "registration_system"
+app.config["MYSQL_DB"] = "registration_system" # there must be a database named registration_systme. i
 
 
-
+# This is just to disable the browsers back button after logout
 @app.after_request
 def add_cache_control_headers(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
@@ -27,12 +27,11 @@ def add_cache_control_headers(response):
     return response
 
 
-
 # initialize mysql server
 mysql = MySQL(app)
 
 
-
+# url to the root page
 @app.route('/')
 @app.route('/dashboard')
 def home():
@@ -42,6 +41,7 @@ def home():
 @app.route('/student/register', methods=["POST", "GET"])
 def register():
     try:
+        # check if the user submmited the data and and store the details
         if request.method == "POST":
             fname = request.form.get("fname")
             lname = request.form.get("lname")
@@ -52,28 +52,27 @@ def register():
             password = request.form.get("pwd")
             confirm_pswd = request.form.get("cpwd")
 
+            # check if the passwords are consistent
             if password != confirm_pswd:
                 flash("Your passwords are mismatched! Try again")
                 return render_template('register.html', head="Register")
             
 
-            
+            # connect to the database server
             cursor = mysql.connection.cursor()
             cursor.execute("SELECT * from student where stu_email=%s", (email, ))
-            student_email = cursor.fetchone()
+            student_email = cursor.fetchone() # retrive the first row from the student table as tuple and store in student_email
 
+            # check if student already registered, if so redirect him to the login page
             if student_email:
                 flash("You have already registered! Login here.")
                 return redirect(url_for("login_student"))
 
             application_year = now.year
             student_id = f"mit/ur{random_id()}/{str(application_year)[2:]}"
-
+        
             cursor.execute("SELECT * FROM department where dept_name=%s", (department, ))
             dept_info = cursor.fetchone()
-            if not dept_info:
-                flash("No such Dpeartment Available!")
-                return render_template('register.html', head="Register") 
 
             dept_id = dept_info[0]
             no_of_stuedents = dept_info[2] + 1
@@ -82,18 +81,21 @@ def register():
             cursor.execute("UPDATE department SET n_students=%s where dept_id=%s", (no_of_stuedents, dept_id))
             mysql.connection.commit()
             cursor.close()
+
+            # send comfirmation email
             send_email(email, f"Conguratulations!  {fname.title()} {lname.title()}  You have Successfully registered To MIT with ID number: {student_id}. Please keep Your ID If you forgote that you need to consult the registrar office. The Future is bright with MIT. Thank You!", "MIT registration")
             flash(f"Conguratulations {fname}! Now You are A memeber of our Campus. With ID: {student_id}")
             return redirect(url_for("login_student"))
     except Exception:
-        flash("We are Sorry! Something went wrog. Please try refreshing the page.")
+        flash("We are Sorry! Something went wrong. Please try refreshing the page.")
 
     return render_template('register.html', head="Register")
 
-
+# url to instructor registration
 @app.route('/instructor/registration', methods=["POST", "GET"])
 def instructor_registration():
     try:
+        # check if an instructor submmited the data and and store the details
         if request.method == "POST":
             fname = request.form.get("fname")
             lname = request.form.get("lname")
@@ -110,9 +112,10 @@ def instructor_registration():
             cursor = mysql.connection.cursor()
             cursor.execute("SELECT * FROM instructor where ins_email=%s", (email, ))
             instructor_email = cursor.fetchone()
-
+            
+             # check if instructor already registered, if so redirect him to the login page
             if instructor_email:
-                flash("You have already Applied! Login her as an instructor.")
+                flash("You have already Applied! Login here as an instructor.")
                 return redirect(url_for("login_instructor"))
             
             instructor_id = f"{fname.lower()}/{random_id()}"
@@ -120,12 +123,14 @@ def instructor_registration():
             cursor.execute("INSERT INTO instructor(instructor_id, instructor_fname, ins_email, ins_phone, instructor_lname, instructor_address, password) values(%s, %s, %s, %s, %s, %s, %s)", (instructor_id, fname, email, phone_no, lname, address, hashed_password))
             mysql.connection.commit()
             cursor.close()
-            send_email(email, f"Conguratulations!  {fname.title()} {lname.title()}  You have Successfully Applied To MIT with ID number: {instructor_id}. Please keep Your ID If you forgote that you need to consult the registrar office. The Future is bright with MIT. Thank You!", "MIT Application")
+
+            # send comfirmation message via email
+            send_email(email, f"Conguratulations!  {fname.title()} {lname.title()}  You have Successfully Applied To MIT with ID number: {instructor_id}. Please keep Your ID If you forgot that you need to consult the registrar office. The Future is bright with MIT. Thank You!", "MIT Application")
             flash(f"You have Successfully Applied!  with ID: {instructor_id}")
             return redirect(url_for("login_instructor"))
 
     except Exception:
-        flash("We are Sorry! Something went wrog. Please try refreshing the page.")
+        flash("We are Sorry! Something went wrong. Please try refreshing the page.")
 
     return render_template("instructor_registration.html", head="Instructor Registration")
 
